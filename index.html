@@ -73,7 +73,7 @@
 
     <!-- Navigation Bar -->
     <div class="w3-bar w3-white w3-border-bottom w3-xlarge">
-        <a href="main.html" class="w3-bar-item w3-button w3-text-red w3-hover-red"><b><i
+        <a href="index.html" class="w3-bar-item w3-button w3-text-red w3-hover-red"><b><i
                     class="fa fa-map-marker w3-margin-right"></i>Eurotrip</b></a>
         <div class="dropdown" style="float:right;">
             <button class="dropbtn"><i class="fa fa-search"></i></button>
@@ -103,7 +103,7 @@
                         <label>A</label>
                         <input class="w3-input w3-border" type="text" placeholder="Lugar de destino" id="userInput">
                     </div>
-                    <p><input type="submit" class="w3-button w3-dark-grey" value="buscar" onclick="Pais();">
+                    <p><input type="submit" class="w3-button w3-dark-grey" value="buscar" onclick="buscarLugar('París');">
                         <link href="pagina1.html">
                     </p>
                 </form>
@@ -183,6 +183,24 @@ xhr.setRequestHeader('x-rapidapi-host', 'iata-and-icao-codes.p.rapidapi.com');
 xhr.send(data);
         // Click on the first tablink on load
         document.getElementsByClassName("tablink")[0].click();
+
+
+
+function buscarLugar(ciudad) {
+  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${ciudad}`;
+
+  fetch(url)
+    .then(response => response.json())
+    .then(data => {
+      console.log(data[0].display_name); // Mostrar el nombre completo del lugar
+    })
+    .catch(error => {
+      console.error('Error:', error);
+    });
+}
+
+
+	    
     </script>
 
 </body>
