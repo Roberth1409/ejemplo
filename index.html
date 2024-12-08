@@ -1,208 +1,21 @@
 <!DOCTYPE html>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <head>
-    <title>W3.CSS Template</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        body,
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-family: "Raleway", Arial, Helvetica, sans-serif
-        }
-
-        .myLink {
-            display: none
-        }
-
-        .dropbtn {
-            background-color: #ffffff;
-            color: rgb(0, 0, 0);
-            padding: 16px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-        }
-
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            right: 0;
-            background-color: #f9f9f9;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-        }
-
-        .dropdown-content a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown:hover .dropbtn {
-            background-color: #00000044;
-        }
-    </style>
+    <title>Mi Web de Viajes</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+<body>
 
-<body class="w3-light-grey">
-
-    <!-- Navigation Bar -->
-    <div class="w3-bar w3-white w3-border-bottom w3-xlarge">
-        <a href="index.html" class="w3-bar-item w3-button w3-text-red w3-hover-red"><b><i
-                    class="fa fa-map-marker w3-margin-right"></i>Eurotrip</b></a>
-        <div class="dropdown" style="float:right;">
-            <button class="dropbtn"><i class="fa fa-search"></i></button>
-            <div class="dropdown-content">
-                <a href="#">Registro</a>
-                <a href="#">Sobre Nosotros</a>
-                <a href="#">Contacto</a>
-            </div>
-        </div>
+    <div class="buscador">
+        <label for="origen">País de Origen:</label>
+        <input type="text" id="origen" name="origen">
+        <label for="destino">País de Destino:</label>
+        <input type="text" id="destino" name="destino">
+        <button id="btnBuscar" >Buscar Requisitos</button>
     </div>
 
-    <!-- Header -->
-    <header class="w3-display-container w3-content w3-hide-small" style="max-width:1500px">
-        <img class="w3-image" src="https://www.w3schools.com/w3images/london2.jpg" alt="London" width="1500"
-            height="700">
-        <div class="w3-display-middle" style="width:65%">
-            <div class="w3-bar w3-black">
-                <button class="w3-bar-item w3-button tablink" onclick="openLink(event, 'Flight');"><i
-                        class="fa fa-plane w3-margin-right"></i>Datos de vuelo</button>
-            </div>
+    <div id="resultados"></div>
 
-            <!-- Tabs -->
-            <div id="Flight" class="w3-container w3-white w3-padding-16 myLink">
-                <h3>Preparate para el mundo con nosotros</h3>
-                <form id="form" onsubmit="return false">
-                    <div class="w3-row-padding" style="margin:0 -16px;">
-                        <label>A</label>
-                        <input class="w3-input w3-border" type="text" placeholder="Lugar de destino" id="userInput">
-                    </div>
-                    <p><input type="submit" class="w3-button w3-dark-grey" value="buscar" onclick="location.href='pagina1.html'">
-                        <link href="pagina1.html">
-                    </p>
-                </form>
-            </div>
-        </div>
-    </header>
-
-    <!--API WHO / OMS-->
-    <GHO xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Created="2024-11-11T21:11:37Z"
-        xsi:schemaLocation="ghodata.xsd">
-        <QueryParameter Name="format" Value="xml" />
-        <QueryParameter Name="baseurl" Value="https://apps.who.int/gho/athena/api/" />
-        <QueryParameter Name="filter" Value="COUNTRY:BWA;YEAR:2011;SEX:BTSX" />
-        <QueryParameter Name="asof" Value="2024-11-11 21:11:37.0" />
-        <QueryParameter Name="metadata" Value="active" />
-        <QueryParameter Name="target" Value="GHO/WHOSIS_000001" />
-        <Copyright>
-            <Display>(c) World Health Organization</Display>
-        </Copyright>
-        <Disclaimer>
-            <Display>The information in this database is provided as a service to our users. Any use of information in
-                the web site should be accompanied by an acknowledgment of WHO as the source. The responsibility for the
-                interpretation and use of the material lies with the user. In no event shall the World Health
-                Organization be liable for any damages arising from the use of the information linked to this section.
-            </Display>
-        </Disclaimer>
-        <Metadata> </Metadata>
-        <Data>
-    </GHO>
-    
-
-    <!-- <form id="form" onsubmit="return false;">
-        <input style="position:absolute; top:80%; left:5%; width:40%;" type="text" id="userInput" />
-        <input style="position:absolute; top:50%; left:5%; width:40%;" type="submit" onclick="othername();" />
-    </form>-->
-
-
-
-
-
-
-    <script>
-        // Tabs
-        function openLink(evt, linkName) {
-            var i, x, tablinks;
-            x = document.getElementsByClassName("myLink");
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tablink");
-            for (i = 0; i < x.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
-            }
-            document.getElementById(linkName).style.display = "block";
-            evt.currentTarget.className += " w3-red";
-        }
-
-        function Pais() {
-            var input = document.getElementById("userInput").value;
-            alert(input);
-        }
-        const data = null;
-
-const xhr = new XMLHttpRequest();
-xhr.withCredentials = true;
-
-xhr.addEventListener('readystatechange', function () {
-	if (this.readyState === this.DONE) {
-		console.log(this.responseText);
-	}
-});
-
-xhr.open('GET', 'https://iata-and-icao-codes.p.rapidapi.com/airlines');
-xhr.setRequestHeader('x-rapidapi-key', 'Sign Up for Key');
-xhr.setRequestHeader('x-rapidapi-host', 'iata-and-icao-codes.p.rapidapi.com');
-
-xhr.send(data);
-        // Click on the first tablink on load
-        document.getElementsByClassName("tablink")[0].click();
-
-
-
-function buscarLugar(ciudad) {
-  const url = `https://nominatim.openstreetmap.org/search?format=json&q=${ciudad}`;
-
-  fetch(url)
-    .then(response => response.json())
-    .then(data => {
-      console.log(data[0].display_name); // Mostrar el nombre completo del lugar
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-}
-
-
-	    
-    </script>
-
+    <script type="module" src="script.js"></script> </body>
 </body>
-
 </html>
