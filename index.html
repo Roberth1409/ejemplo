@@ -3,10 +3,12 @@
 
 <head>
   <title>W3.CSS Template</title>
+  <title>Mi Web de Viajes</title>
+  <link rel="stylesheet" href="style.css">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <style>
     body,
@@ -31,60 +33,58 @@
 
   <!-- Header -->
   <header class="w3-display-container w3-content" style="max-width:1500px;">
-    <img class="w3-image" src="fondo1.jpg" alt="The Hotel" style="min-width:1000px" width="1500" height="400">
+    <img class="w3-image" src="fondo1.jpg" alt="The Hotel" style="min-width:1000px" width="1500" height="800">
     <div class="w3-display-left w3-padding w3-col l6 m8">
       <div class="w3-container w3-red">
         <h2><i class="fa fa-search w3-margin-right"></i>Buscador</h2>
       </div>
       <div class="w3-container w3-white w3-padding-16">
-        <form action="/action_page.php" target="_blank">
-          <div class="w3-row-padding" style="margin:0 -16px;">
+        <div class="w3-row-padding" style="margin:0 -16px;">
             <div class="w3-half w3-margin-bottom">
               <label><i class="fa fa-map-marker"></i> Pais de Origen:</label>
               <input class="w3-input w3-border" type="text" placeholder="Desde" id="origen" name="origen" required>
             </div>
             <div class="w3-half">
               <label><i class="fa fa-map-marker"></i> País de Destino:</label>
-              <input class="w3-input w3-border" type="text" placeholder="Hacia" id="destino "name="destino" required>
+              <input class="w3-input w3-border" type="text" placeholder="Hacia" id="destino" name="destino" required>
             </div>
           </div>
           <div class="w3-margin-bottom">
-            <button onclick="buscarRequisitos()" class="w3-button w3-dark-grey" type="submit"><i
+            <button onclick="buscarRequisitos()" class="w3-button w3-dark-grey" ><i
                 class="fa fa-search w3-margin-right"></i>Buscar</button>
           </div>
           <div>
             <div>
               <a id="myBtn" onclick="myFunc('Demo1')" href="javascript:void(0)" class="w3-bar-item w3-button"><i
-                  class="fa fa-inbox w3-margin-right"></i>Requisitos de Viaje (3)<i
+                  class="fa fa-inbox w3-margin-right"></i>Requisitos de Viaje:<i
                   class="fa fa-caret-down w3-margin-right"></i></a>
             </div>
             <div id="Demo1" class="w3-hide w3-animate-left">
-              <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-                onclick="openMail('Borge');w3_close();" id="firstTab">
+              <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey" id="firstTab">
                 <div class="w3-container">
-                  <span class="w3-bar-item w3-opacity w3-large">La moneda utilizada en el destino es: </span><span>Euro</span>
+                  <p class="w3-bar-item w3-opacity w3-large">La moneda utilizada en el destino es: </p>
+                  <span id="moneda"></span>
                 </div>
               </a>
-              <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-                onclick="openMail('Borge');w3_close();" >
+              <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey">
                 <div class="w3-container">
-                  <span class="w3-bar-item w3-opacity w3-large">El tiempo de estadia permitido es: </span><span>Euro</span>
+                  <p class="w3-bar-item w3-opacity w3-large">El tiempo de estadia permitido es: </p>
+                  <span id="stay_of"></span>
                 </div>
               </a>
-              <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-                onclick="openMail('Borge');w3_close();" >
+              <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey">
                 <div class="w3-container">
-                  <span class="w3-bar-item w3-opacity w3-large">El pasaporte debe tener una vigencia de: </span><span>Euro</span>
+                  <p class="w3-bar-item w3-opacity w3-large">El pasaporte debe tener una vigencia de: </p>
+                  <span id="pass_valid"></span>
                 </div>
               </a>
-              <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey"
-                onclick="openMail('Borge');w3_close();" >
+              <a href="javascript:void(0)" class="w3-bar-item w3-button w3-border-bottom test w3-hover-light-grey">
                 <div class="w3-container">
-                  <span class="w3-bar-item w3-opacity w3-large">Requisitos de Visado: </span><span>Euro</span>
+                  <p class="w3-bar-item w3-opacity w3-large">Requisitos de Visado: </p>
+                  <span id="visa"></span>
                 </div>
               </a>
             </div>
-        </form>
       </div>
     </div>
   </header>
@@ -93,72 +93,36 @@
   <div class="w3-content" style="max-width:1532px;">
 
     <div class="w3-container w3-margin-top" id="rooms">
-      <h3>Rooms</h3>
-      <p>Make yourself at home is our slogan. We offer the best beds in the industry. Sleep well and rest well.</p>
+      <h3>Buscador de Actividades</h3>
+      <p>Prueba nuestro buscador y encuentra lugares interesantes qué visitar: </p>
     </div>
 
-    <div class="w3-row-padding">
+    <div class="w3-row-padding" id="resultadosBusqueda">
       <div class="w3-col m3">
-        <label><i class="fa fa-calendar-o"></i> Check In</label>
-        <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY">
+        <label><i class="fa fa-calendar-o"></i>Ciudad: </label>
+        <select class="w3-select" id="ciudad">
+            <option value="all">Seleccionar Ciudad</option>
+        </select>
+      </div>
+      <div class="w3-col m2">
+        <label><i class="fa fa-search"></i>Actividades: </label>
+        <button class="w3-button w3-block w3-black" onclick="buscarActividades()">Buscar</button>
       </div>
       <div class="w3-col m3">
-        <label><i class="fa fa-calendar-o"></i> Check Out</label>
-        <input class="w3-input w3-border" type="text" placeholder="DD MM YYYY">
-      </div>
-      <div class="w3-col m2">
-        <label><i class="fa fa-male"></i> Adults</label>
-        <input class="w3-input w3-border" type="number" placeholder="1">
-      </div>
-      <div class="w3-col m2">
-        <label><i class="fa fa-child"></i> Kids</label>
-        <input class="w3-input w3-border" type="number" placeholder="0">
-      </div>
-      <div class="w3-col m2">
-        <label><i class="fa fa-search"></i> Search</label>
-        <button class="w3-button w3-block w3-black">Search</button>
+        <label><i class="fa fa-calendar-o" ></i>Categorias: </label>
+        <select class="w3-select" id="filtroCategoria">
+            <option value="all">Todas las categorías</option>
+        </select>
       </div>
     </div>
 
-    <div class="w3-row-padding w3-padding-16">
-      <div class="w3-third w3-margin-bottom">
-        <img src="/w3images/room_single.jpg" alt="Norway" style="width:100%">
-        <div class="w3-container w3-white">
-          <h3>Single Room</h3>
-          <h6 class="w3-opacity">From $99</h6>
-          <p>Single bed</p>
-          <p>15m<sup>2</sup></p>
-          <p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i></p>
-          <button class="w3-button w3-block w3-black w3-margin-bottom">Choose Room</button>
-        </div>
-      </div>
-      <div class="w3-third w3-margin-bottom">
-        <img src="/w3images/room_double.jpg" alt="Norway" style="width:100%">
-        <div class="w3-container w3-white">
-          <h3>Double Room</h3>
-          <h6 class="w3-opacity">From $149</h6>
-          <p>Queen-size bed</p>
-          <p>25m<sup>2</sup></p>
-          <p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i
-              class="fa fa-tv"></i></p>
-          <button class="w3-button w3-block w3-black w3-margin-bottom">Choose Room</button>
-        </div>
-      </div>
-      <div class="w3-third w3-margin-bottom">
-        <img src="/w3images/room_deluxe.jpg" alt="Norway" style="width:100%">
-        <div class="w3-container w3-white">
-          <h3>Deluxe Room</h3>
-          <h6 class="w3-opacity">From $199</h6>
-          <p>King-size bed</p>
-          <p>40m<sup>2</sup></p>
-          <p class="w3-large"><i class="fa fa-bath"></i> <i class="fa fa-phone"></i> <i class="fa fa-wifi"></i> <i
-              class="fa fa-tv"></i> <i class="fa fa-glass"></i> <i class="fa fa-cutlery"></i></p>
-          <button class="w3-button w3-block w3-black w3-margin-bottom">Choose Room</button>
-        </div>
-      </div>
-    </div>
+    <div class="w3-row-padding w3-padding-16" id="recomendaciones">
 
-    <div class="w3-row-padding" id="about">
+        <!-- Aquí aparecerán las recomendaciones-->
+
+    </div>
+    <!-- apartado descripcion de la Web-->
+    <!--<div class="w3-row-padding" id="about">
       <div class="w3-col l4 12">
         <h3>About</h3>
         <h6>Our hotel is one of a kind. It is truely amazing. Lorem ipsum dolor sit amet, consectetur adipiscing elit,
@@ -172,28 +136,28 @@
             class="fa fa-cc-paypal w3-large"></i></p>
       </div>
       <div class="w3-col l8 12">
-        <!-- Image of location/map -->
+        
         <img src="/w3images/map.jpg" class="w3-image w3-greyscale" style="width:100%;">
       </div>
-    </div>
+    </div>-->
 
-    <div class="w3-row-padding w3-large w3-center" style="margin:32px 0">
+    <!--<div class="w3-row-padding w3-large w3-center" style="margin:32px 0">
       <div class="w3-third"><i class="fa fa-map-marker w3-text-red"></i> 423 Some adr, Chicago, US</div>
       <div class="w3-third"><i class="fa fa-phone w3-text-red"></i> Phone: +00 151515</div>
       <div class="w3-third"><i class="fa fa-envelope w3-text-red"></i> Email: mail@mail.com</div>
-    </div>
+    </div>-->
 
-    <div class="w3-panel w3-red w3-leftbar w3-padding-32">
+    <!--<div class="w3-panel w3-red w3-leftbar w3-padding-32">
       <h6><i class="fa fa-info w3-deep-orange w3-padding w3-margin-right"></i> On demand, we can offer playstation,
         babycall, children care, dog equipment, etc.</h6>
-    </div>
+    </div>-->
 
-    <div class="w3-container">
+    <!--<div class="w3-container">
       <h3>Our Hotels</h3>
       <h6>You can find our hotels anywhere in the world:</h6>
-    </div>
+    </div>-->
 
-    <div class="w3-row-padding w3-padding-16 w3-text-white w3-large">
+    <!--<div class="w3-row-padding w3-padding-16 w3-text-white w3-large">
       <div class="w3-half w3-margin-bottom">
         <div class="w3-display-container">
           <img src="/w3images/cinqueterre.jpg" alt="Cinque Terre" style="width:100%">
@@ -230,17 +194,17 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
 
-    <div class="w3-container w3-padding-32 w3-black w3-opacity w3-card w3-hover-opacity-off" style="margin:32px 0;">
+    <!--<div class="w3-container w3-padding-32 w3-black w3-opacity w3-card w3-hover-opacity-off" style="margin:32px 0;">
       <h2>Get the best offers first!</h2>
       <p>Join our newsletter.</p>
       <label>E-mail</label>
       <input class="w3-input w3-border" type="text" placeholder="Your Email address">
       <button type="button" class="w3-button w3-red w3-margin-top">Subscribe</button>
-    </div>
+    </div>-->
 
-    <div class="w3-container" id="contact">
+    <!--<div class="w3-container" id="contact">
       <h2>Contact</h2>
       <p>If you have any questions, do not hesitate to ask them.</p>
       <i class="fa fa-map-marker w3-text-red" style="width:30px"></i> Chicago, US<br>
@@ -253,13 +217,13 @@
         </p>
         <p><button class="w3-button w3-black w3-padding-large" type="submit">SEND MESSAGE</button></p>
       </form>
-    </div>
+    </div>-->
 
     <!-- End page content -->
   </div>
 
   <!-- Footer -->
-  <footer class="w3-padding-32 w3-black w3-center w3-margin-top">
+  <!--<footer class="w3-padding-32 w3-black w3-center w3-margin-top">
     <h5>Find Us On</h5>
     <div class="w3-xlarge w3-padding-16">
       <i class="fa fa-facebook-official w3-hover-opacity"></i>
@@ -271,11 +235,11 @@
     </div>
     <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank"
         class="w3-hover-text-green">w3.css</a></p>
-  </footer>
+  </footer>-->
 
   <!-- Add Google Maps -->
-  <script>
-    function myMap() {
+  <script src="script.js">
+    /*function myMap() {
       myCenter = new google.maps.LatLng(41.878114, -87.629798);
       var mapOptions = {
         center: myCenter,
@@ -288,10 +252,10 @@
         position: myCenter,
       });
       marker.setMap(map);
-    }
+    }*/
   </script>
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>
+  <!--<script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBu-916DdpKAjTmJNIgngS6HL_kDIKU0aU&callback=myMap"></script>-->
   <script>
     var openInbox = document.getElementById("myBtn");
     openInbox.click();
@@ -318,7 +282,7 @@
       }
     }
 
-    openMail("Borge")
+    /*openMail("Borge")
     function openMail(personName) {
       var i;
       var x = document.getElementsByClassName("person");
@@ -331,7 +295,7 @@
       }
       document.getElementById(personName).style.display = "block";
       event.currentTarget.className += " w3-light-grey";
-    }
+    }*/
   </script>
 
   <!--

@@ -57,7 +57,7 @@ const ciudadesPorPais = {
     "República Checa": ["Praga", "Brno", "Pilsen"],
     "Rumania": ["Bucarest", "Iași", "Cluj-Napoca"],
     "Suecia": ["Estocolmo", "Gotemburgo", "Malmö"]
-  };
+};
 
 
 const diccionarioCiudades = {
@@ -138,7 +138,7 @@ const diccionarioCiudades = {
     "Estocolmo": "Stockholm",
     "Gotemburgo": "Gothenburg",
     "Malmö": "Malmo"
-  };
+};
 
 
 
@@ -148,9 +148,9 @@ const archivoJSON = {};
 
 async function buscarRequisitos() {
     const origen = document.getElementById('origen').value;
-    //console.log(origen);
+    console.log(origen);
     const destino = document.getElementById('destino').value;
-
+    console.log(destino);
     function obtenerCodigoPais(nombrePais) {
         const nombreNormalizado = nombrePais.toLowerCase();
         //console.log(nombreNormalizado)
@@ -218,7 +218,7 @@ async function buscarRequisitos() {
 
     const ciudades = ciudadesPorPais[destino];
     const selectCiudad = document.getElementById('ciudad');
-    console.log('selectciudad: ',selectCiudad);
+    console.log('selectciudad: ', selectCiudad);
     ciudades.forEach(ciudad => {
         const option = document.createElement('option');
         option.value = ciudad;
@@ -226,20 +226,20 @@ async function buscarRequisitos() {
         selectCiudad.appendChild(option);
     });
 
-    
- 
-   
-    const resultadosBusquedaDiv = document.getElementById('resultadosBusqueda');
-    resultadosBusquedaDiv.style.display = 'block';
 
 
-//resolver pequeño bug
+
+    /*const resultadosBusquedaDiv = document.getElementById('resultadosBusqueda');
+    resultadosBusquedaDiv.style.display = 'block';*/
+
+
+    //resolver pequeño bug
     selectCiudad.addEventListener('change', () => {
         const ciudadSeleccionada = selectCiudad.value;
-        console.log('En español: ' ,ciudadSeleccionada);
+        console.log('En español: ', ciudadSeleccionada);
         //consultar diccionario
         const ciudadEnIngles = diccionarioCiudades[ciudadSeleccionada];
-        console.log('En Ingles: ' ,ciudadEnIngles);
+        console.log('En Ingles: ', ciudadEnIngles);
         buscarActividades(ciudadEnIngles);
     });
 
@@ -271,11 +271,12 @@ async function buscarActividades(ciudad) {
         const response2 = await fetch(url2, options2);
         const result2 = await response2.json();
         //parametrizacion de variables y datos del JSON:
+        result2.data.sort((a, b) => a.title.localeCompare(b.title));
 
         console.log(result2);
         //result2.data
         if (result2.data && Array.isArray(result2.data)) {
-            //console.log('es array');
+            console.log('es array');
             const categorias = [...new Set(result2.data.map(actividad => actividad.category))];
             const select = document.getElementById('filtroCategoria');
 
@@ -295,14 +296,20 @@ async function buscarActividades(ciudad) {
             // Iterar sobre los resultados y crear elementos de lista
             result2.data.forEach(actividad => {
                 const li = document.createElement('li');
-                li.classList.add('recomendacion'); // Asigna la clase para aplicar los estilos CSS
+                //li.classList.add('recomendacion'); // Asigna la clase para aplicar los estilos CSS
                 li.innerHTML = `
-<img src="${actividad.image}" alt="${actividad.description}">
-<h3>${actividad.title}</h3>
-<p>${actividad.description}</p>
-<p>Categoría: ${actividad.category}</p>
-<p>Duración: ${actividad.duration}</p>
-<a href="${actividad.url}" target="_blank"><button>Más información</button></a>
+
+
+    <div class="w3-third w3-margin-bottom">
+        <img src="${actividad.image}" alt="${actividad.description}" style="width:100%">
+        <div class="w3-container w3-white">
+          <h3>${actividad.title}</h3>
+          <h6 class="w3-opacity">${actividad.description}</h6>
+          <p>${actividad.category}</p>
+          <p>${actividad.duration}</p>
+          <button href="${actividad.url}" target="${actividad.url}" class="w3-button w3-block w3-black w3-margin-bottom">Más Información</button>
+        </div>
+    </div>
 `;
                 if (categoriaSeleccionada === 'all' || actividad.category === categoriaSeleccionada) {
                     listaRecomendaciones.appendChild(li);
